@@ -6,7 +6,6 @@ class Cart {
     public Cart() {
         this.items = new ArrayList<>();
     }
-
     //add products to cart
     public boolean add(Product product, int quantity) {
         if (product == null || quantity <= 0) {
@@ -16,7 +15,6 @@ class Cart {
             System.out.println("Not enough stock for " + product.getName());
             return false;
         }
-
         // check if product already in cart
         for (CartItem item : items) {
             if (item.getProduct().equals(product)) {
@@ -35,10 +33,8 @@ class Cart {
         items.add(new CartItem(product, quantity));
         return true;
     }
-
     public List<CartItem> getItems() {
         return items; }
-
 
 
     public boolean isEmpty()

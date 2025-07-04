@@ -10,11 +10,9 @@ class ECommerceSystem {
             System.out.println("ERROR: Cart is empty!");
             return;
         }
-
         // check product availabilty and calculate subtotal
         double subtotal = 0;
         List<ShippableItem> shippableItems = new ArrayList<>();
-
         for (CartItem item : cart.getItems()) {
             Product product = item.getProduct();
             int quantity = item.getQuantity();
@@ -24,15 +22,12 @@ class ECommerceSystem {
                 System.out.println("ERROR: Product " + product.getName() + " is out of stock or expired!");
                 return;
             }
-
             // check if we have enought stock
             if (quantity > product.getQuantity()) {
                 System.out.println("ERROR: Not enough stock for " + product.getName());
                 return;
             }
-
             subtotal += item.getTotalPrice();
-
             // collect shippable items - this logic is bit messy but works
             if (product.needsShipping()) {
                 for (int i = 0; i < quantity; i++) {
@@ -51,7 +46,6 @@ class ECommerceSystem {
                 }
             }
         }
-
         // calculate shipping
         double shippingFee = 0;
         if (!shippableItems.isEmpty()) {
@@ -60,20 +54,16 @@ class ECommerceSystem {
                     .sum();
             shippingFee = totalWeight * SHIPPING_RATE;
         }
-
         double totalAmount = subtotal + shippingFee;
-
         // check customer balance - this is important!
         if (customer.getBalance() < totalAmount) {
             System.out.println("ERROR: Insufficient balance! Required: " + totalAmount + ", Available: " + customer.getBalance());
             return;
         }
-
         // process shipment first - order matters here
         if (!shippableItems.isEmpty()) {
             ShippingService.processShipment(shippableItems);
         }
-
         // print receipt  format to match
         System.out.println("** Checkout receipt **");
         for (CartItem item : cart.getItems()) {
