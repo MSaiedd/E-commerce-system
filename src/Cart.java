@@ -36,7 +36,8 @@ class Cart {
         return true;
     }
 
-    public List<CartItem> getItems() { return items; }
+    public List<CartItem> getItems() {
+        return items; }
 
 
 
@@ -44,7 +45,6 @@ class Cart {
     {
         return items.isEmpty();
     }
-
     public void clear() {
         items.clear();
     }

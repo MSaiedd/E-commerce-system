@@ -12,17 +12,15 @@ class ExpirableProduct extends Product {
         this.shippable = shippable;
         this.weight = weight;
     }
-
     @Override
     public boolean isAvailable() {
         // shit, is it expired?
-        return quantity > 0 && !expiryDate.isBefore(LocalDate.now());
-    }
-
+        return quantity > 0 && !expiryDate.isBefore(LocalDate.now());}
     @Override
     public boolean needsShipping() {
         return shippable;
     }
 
-    public double getWeight() { return weight; }
+    public double getWeight() {
+        return weight; }
 }
